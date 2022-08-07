@@ -67,8 +67,8 @@ export default function DrawerAppBar(props: Props) {
           </IconButton>
           <Typography
             variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, color: '#fff' }}
+            component="h6"
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'inline-block' }, color: '#fff' }}
           >
             Food Search
           </Typography>

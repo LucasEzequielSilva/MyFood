@@ -1,0 +1,22 @@
+[{"id":1,
+  "name":"Pizza",
+  "img":"pizza.jpg",
+  "category":"pizzas",
+  "price":230,
+  "stock":7
+},
+{ "id":2,
+  "name":"Spaghetti",
+  "img":"spaghetti.jpg",
+  "category":"pastas",
+  "price":150,
+  "stock":4
+},
+{ "id":3,
+  "name":"Asado",
+  "img":"asado.jpg",
+  "category":"carnes",
+  "price":350,
+  "stock":4
+}
+]
