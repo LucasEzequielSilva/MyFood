@@ -4,14 +4,30 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 export default function ActionAreaCard({ items }) {
+  let navigate = useNavigate();
   console.log(items);
+  const handleChangePath = (id) =>{
+    navigate("/item/" + id)
+
+  }
+/*   let backgroundColours = [
+    {
+      pizzas:""
+    },
+    {
+
+    },
+    {
+
+    }
+  ] */
   return (
     <>
       {items.map((item) => {
         return(
-          <Card sx={{ width:'33rem',height:"17rem",borderRadius: 5}} key={items.id}>
+          <Card sx={{ width:'33rem',height:"17rem",borderRadius: 5}} key={items.id} onClick={() => handleChangePath(item.id)}>
             <CardActionArea sx={{display:'flex',flexDirection:'row', height:'100%', width:'33rem', justifyContent: 'space-between'}}>
               <CardMedia
                 component="img"
@@ -30,6 +46,7 @@ export default function ActionAreaCard({ items }) {
                   gutterBottom
                   variant="h5"
                   component="div"
+                  sx={{fontWeight:'bold', color:'#323232'}}
                 >{item.name}</Typography>
                 <Typography variant="body2" color="text.secondary">
                   Lizards are a widespread group of squamate reptiles, with over
