@@ -6,8 +6,9 @@ import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 
 const Main = () => {
-  const [item, setItem] = useState([]);
 
+  const [item, setItem] = useState([]);
+  const [searchText, setSearchText] = useState("");
   useEffect(() => {
     let promise = new Promise((resolve) => {
       setTimeout(() => resolve(data), 2000);
@@ -16,7 +17,7 @@ const Main = () => {
       setItem(res);
     });
   }, []);
-  console.log(item);
+
   return (
     <Box
       className="container"
@@ -34,7 +35,9 @@ const Main = () => {
         <Typography gutterBottom variant="h2" component="h2" sx={{ fontWeight: 'bold', color:'#222' }}>
           Products
         </Typography>
-        <TextField id="outlined-basic" label="Search" variant="outlined" />
+        <TextField id="outlined-basic" label="Search" variant="outlined" onChange={(event)=>{
+          setSearchText(event.target.value)
+        }}/>
       </Box>
       <Box
         sx={{
@@ -46,7 +49,7 @@ const Main = () => {
           flexWrap: "wrap",
         }}
       >
-        <Item items={item} />
+        <Item items={item} searchText={searchText}/>
       </Box>
     </Box>
   );

@@ -5,27 +5,23 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-export default function ActionAreaCard({ items }) {
+export default function ActionAreaCard({ items, searchText }) {
   let navigate = useNavigate();
   console.log(items);
   const handleChangePath = (id) =>{
     navigate("/item/" + id)
 
   }
-/*   let backgroundColours = [
-    {
-      pizzas:""
-    },
-    {
 
-    },
-    {
-
-    }
-  ] */
   return (
     <>
-      {items.map((item) => {
+      {items.filter(val=>{
+        if (searchText == ""){
+          return val
+        }else if(val.name.toLowerCase().trim().includes(searchText.toLowerCase().trim())){
+          return val
+        }
+      }).map((item, key) => {
         return(
           <Card sx={{ width:'33rem',height:"17rem",borderRadius: 5}} key={items.id} onClick={() => handleChangePath(item.id)}>
             <CardActionArea sx={{display:'flex',flexDirection:'row', height:'100%', width:'33rem', justifyContent: 'space-between'}}>
