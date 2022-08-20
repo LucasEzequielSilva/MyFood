@@ -1,22 +1,46 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Item from "./Item";
-import data from "../data/data.json";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
+import { getFirestore, getDocs, collection } from "firebase/firestore";
+import { useParams } from 'react-router-dom';
+import Spinner from './Spinner.tsx'
 
 const Main = () => {
 
   const [item, setItem] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [loading, setLoading] = useState(true)
+  const { name } = useParams()
+
   useEffect(() => {
-    let promise = new Promise((resolve) => {
-      setTimeout(() => resolve(data), 2000);
-    });
-    promise.then((res) => {
-      setItem(res);
-    });
-  }, []);
+    //obteniendo UN doc de la db
+/*     const db = getFirestore()
+    const docRef = doc(db, "items", "1")
+    getDoc(docRef).then((res)=>{
+      const data = {id: res.id, ...res.data()}
+      setItem(data) */
+
+      //obteniendo toda la colección de la db
+
+      const db = getFirestore()
+      const itemCollection = collection(db, "items");
+      getDocs(itemCollection).then((snapshot) => {
+        const data = snapshot.docs.map(doc=>({id:doc.id, ...doc.data() }))
+        if(name){
+          setItem(data.filter(producto=> producto.category.toLowerCase() == name.toLowerCase()))
+          setLoading(false)
+        }else{
+          setItem(data)
+          setLoading(false)
+        }
+      })
+  }, [])
+  if(loading){
+    return <Spinner/>
+  }
+  console.log(item)
 
   return (
     <Box
@@ -49,7 +73,7 @@ const Main = () => {
           flexWrap: "wrap",
         }}
       >
-        <Item items={item} searchText={searchText}/>
+        <Item items={item} searchText={searchText}/> 
       </Box>
     </Box>
   );

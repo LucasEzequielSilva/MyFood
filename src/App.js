@@ -11,6 +11,7 @@ function App() {
       <Navbar/>
       <Routes>      
         <Route index element={<Home/>}/>
+        <Route path="/category/:name" element={<Main/>}/>
         <Route path='/item/:id' element={<ItemDetailContainer/>}/>
       </Routes>
     </BrowserRouter>

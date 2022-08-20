@@ -12,7 +12,7 @@ const Home = () => {
     fontWeight: "Bold",
   });
   const handleChange = () => {
-    window.scrollTo(0, 947)
+    window.scrollTo({top:947, behavior:"smooth"})
   };
   return (
     <Fragment>

@@ -10,7 +10,6 @@ export default function ActionAreaCard({ items, searchText }) {
   console.log(items);
   const handleChangePath = (id) =>{
     navigate("/item/" + id)
-
   }
 
   return (
